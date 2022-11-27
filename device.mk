@@ -25,10 +25,10 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
-PRODUCT_SHIPPING_API_LEVEL := 30
+PRODUCT_SHIPPING_API_LEVEL := 29
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := vayu,bhima
+TARGET_OTA_ASSERT_DEVICE := lime,citrus,lemon,pomelo,juice,chime
 
 TARGET_COPY_OUT_VENDOR := vendor
 
