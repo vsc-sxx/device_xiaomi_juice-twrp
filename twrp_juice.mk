@@ -32,6 +32,3 @@ PRODUCT_NAME := twrp_juice
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := SM6115
 PRODUCT_MANUFACTURER := Xiaomi
-
-# TWRP version
-TW_DEVICE_VERSION  := ShelbyHell

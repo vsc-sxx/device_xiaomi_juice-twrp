@@ -103,6 +103,23 @@ BOARD_USES_METADATA_PARTITION := true
 
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 
+#SHRP-specific lines
+SHRP_PATH := device/xiaomi/juice
+SHRP_MAINTAINER := ShelbyHell
+SHRP_DEVICE_CODE := juice
+SHRP_OFFICIAL := false
+SHRP_EDL_MODE := 1
+SHRP_INTERNAL := /sdcard
+SHRP_EXTERNAL := /sdcard1
+SHRP_OTG := /usb_otg
+SHRP_FLASH := 1
+SHRP_FLASH_MAX_BRIGHTNESS := 255
+SHRP_REC_TYPE := SAR
+SHRP_REC := /dev/block/bootdevice/by-name/recovery
+SHRP_DEVICE_TYPE := A_Only
+SHRP_EXPRESS := true
+SHRP_EXPRESS_USE_DATA := true
+SHRP_DARK := true
 
 # TWRP specific build flags
 TARGET_SUPPORTS_64_BIT_APPS := true
