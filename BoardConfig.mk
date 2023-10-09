@@ -92,6 +92,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CONFIG := vendor/spes-perf_defconfig
 TARGET_KERNEL_HEADERS := kernel/xiaomi/spes
 TARGET_KERNEL_SOURCE := kernel/xiaomi/spes
+BOARD_RAMDISK_USE_LZ4 := true
 
 # Metadata
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
