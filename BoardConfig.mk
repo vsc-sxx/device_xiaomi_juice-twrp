@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/xiaomi/spes
+DEVICE_PATH := device/xiaomi/juice
 
 # Architecture
 TARGET_ARCH := arm64
@@ -20,21 +20,7 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a73
 
 # Assertation
-TARGET_OTA_ASSERT_DEVICE := spes,spesn
-
-# A/B
-AB_OTA_UPDATER := true
-
-AB_OTA_PARTITIONS += \
-    boot \
-    dtbo \
-    product \
-    system \
-    system_ext \
-    vbmeta \
-    vbmeta_system \
-    vendor \
-    vendor_boot
+TARGET_OTA_ASSERT_DEVICE := lime,citrus,lemon,pomelo,juice,chime
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := bengal
@@ -44,66 +30,67 @@ TARGET_NO_BOOTLOADER := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 
+# DTB
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+
+# DTBO
+BOARD_KERNEL_SEPARATED_DTBO := false
+
 # Kernel
+BOARD_KERNEL_CMDLINE := \
+    androidboot.fstab_suffix=qcom \
+    androidboot.init_fatal_reboot_target=recovery \
+    androidboot.hardware=qcom \
+    androidboot.memcg=1 \
+    earlycon=msm_geni_serial,0x4a90000 \
+    lpm_levels.sleep_disabled=1 \
+    msm_rtb.filter=0x237 \
+    service_locator.enable=1 \
+    swiotlb=2048 \
+    loop.max_part=7 \
+    kpti=off
+
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-BOARD_BOOT_HEADER_VERSION := 3
+BOARD_BOOT_HEADER_VERSION := 2
 BOARD_DTB_OFFSET := 0x01f00000
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_IMAGE_NAME := Image.gz
-BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_KERNEL_SEPARATED_DTBO := false
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_TAGS_OFFSET := 0x00000100
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
-BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
-BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=4e00000.dwc3
-BOARD_KERNEL_CMDLINE += androidboot.fstab_suffix=default
-BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
-BOARD_KERNEL_CMDLINE += androidboot.memcg=1
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200n8
-BOARD_KERNEL_CMDLINE += earlycon=msm_geni_serial,0x4a90000
-BOARD_KERNEL_CMDLINE += loop.max_part=7
-BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
-BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
-BOARD_KERNEL_CMDLINE += service_locator.enable=1
-BOARD_KERNEL_CMDLINE += swiotlb=2048
-
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_CONFIG := vendor/spes-perf_defconfig
-TARGET_KERNEL_HEADERS := kernel/xiaomi/spes
-TARGET_KERNEL_SOURCE := kernel/xiaomi/spes
+TARGET_KERNEL_CONFIG := vendor/bengal-perf_defconfig
+TARGET_KERNEL_HEADERS := kernel/xiaomi/juice
+TARGET_KERNEL_SOURCE := kernel/xiaomi/juice
 BOARD_RAMDISK_USE_LZ4 := true
-
-# Metadata
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-BOARD_USES_METADATA_PARTITION := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 134217728
-BOARD_DTBOIMG_PARTITION_SIZE := 25165824
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 112419745792
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 134217728
+BOARD_DTBOIMG_PARTITION_SIZE := 16777216
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 114553663488
+BOARD_CACHEIMAGE_PARTITION_SIZE := 402653184
 
-BOARD_SUPER_PARTITION_SIZE := 9126805504
+BOARD_SUPER_PARTITION_SIZE := 8589934592
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 8589934592
+
+BOARD_USES_METADATA_PARTITION := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-
-BOARD_USES_SYSTEM_EXTIMAGE := true
-BOARD_USES_PRODUCTIMAGE := true
-
-BUILD_WITHOUT_VENDOR := true
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 TARGET_COPY_OUT_VENDOR := vendor
@@ -115,6 +102,10 @@ TARGET_BOARD_PLATFORM := bengal
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+
+# Prebuilts for DTB and DTBO [DNM - wait for source release by Xiaomi Inc.]
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 
 # Recovery
 BOARD_USES_RECOVERY_AS_BOOT := true

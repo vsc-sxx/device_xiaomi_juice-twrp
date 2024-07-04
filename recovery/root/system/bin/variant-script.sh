@@ -1,43 +1,61 @@
 #!/system/bin/sh
 # This script is needed to automatically set device props.
 
-load_spes()
+load_citrus()
 {
-    resetprop "ro.product.model" "2201117TG"
-    resetprop "ro.product.vendor.model" "2201117TG"
-    resetprop "ro.product.name" "spes"
-    resetprop "ro.build.product" "spes"
-    resetprop "ro.product.device" "spes"
-    resetprop "ro.product.system.device" "spes"
-    resetprop "ro.product.vendor.device" "spes"
-    resetprop "ro.vendor.product.device" "spes"
+    resetprop "ro.product.model" "POCO M3"
+    resetprop "ro.product.name" "citrus"
+    resetprop "ro.build.product" "citrus"
+    resetprop "ro.product.device" "citrus"
+    resetprop "ro.vendor.product.device" "citrus"
 }
 
-load_spesn()
+load_lime()
 {
-    resetprop "ro.product.model" "2201117TY"
-    resetprop "ro.product.vendor.model" "2201117TY"
-    resetprop "ro.product.name" "spesn"
-    resetprop "ro.build.product" "spesn"
-    resetprop "ro.product.device" "spesn"
-    resetprop "ro.product.system.device" "spesn"
-    resetprop "ro.product.vendor.device" "spesn"
-    resetprop "ro.vendor.product.device" "spesn"
+    resetprop "ro.product.model" "Redmi Note 9 4G"
+    resetprop "ro.product.name" "lime"
+    resetprop "ro.build.product" "lime"
+    resetprop "ro.product.device" "lime"
+    resetprop "ro.vendor.product.device" "lime"
 }
 
-variant=$(getprop ro.boot.hwc)
+load_lemon()
+{
+    resetprop "ro.product.model" "Redmi 9T NFC"
+    resetprop "ro.product.name" "lemon"
+    resetprop "ro.build.product" "lemon"
+    resetprop "ro.product.device" "lemon"
+    resetprop "ro.vendor.product.device" "lemon"
+}
+
+load_pomelo()
+{
+    resetprop "ro.product.model" "Redmi 9T Brazil"
+    resetprop "ro.product.name" "pomelo"
+    resetprop "ro.build.product" "pomelo"
+    resetprop "ro.product.device" "pomelo"
+    resetprop "ro.vendor.product.device" "pomelo"
+}
+
+variant=$(getprop ro.boot.product.hardware.sku)
 echo $variant
 
 case $variant in
-    "GLOBAL")
-        load_spes
+    "citrus")
+        load_citrus
         ;;
-    "EUROPE")
-        load_spesn
+    "lime")
+        load_lime
         ;;
+    "lemon")
+        load_lemon
+        ;;
+    "pomelo")
+	load_pomelo
+	;;
     *)
-        load_spes
-        ;;
+	load_citrus
+	;;
 esac
 
 exit 0
